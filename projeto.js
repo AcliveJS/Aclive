@@ -2,8 +2,7 @@ var P=[];
 var x = [],y = [], z= [];
 x[1] = 20;
 y[1] = 30;
-z[1] = 0;
-
+z[1] = 10;
 
 
 function Ambiente(){
