@@ -11,17 +11,14 @@ Obrigatoriamente o arquivo de simulação deverá se chamar projeto.js
 Este arquivo pode ser editado no bloco de notas do Windows, NotePad++ ou qualquer outro editor.
 
 Corpo principal de todo o projeto:
-.............................
-// Variáveis globais
 function Ambiente()
 {
-	// comandos aqui!
+	/* comandos aqui! */
 }
 function Simulacao()
 {
-	// comandos aqui!
+	/* comandos aqui! */
 }
-.............................
 
 Para executar a simulação basta clicar abrir o arquivo main.html 
 Navegadores aceitos: Firefox, Google Chrome.
