@@ -5,9 +5,11 @@ function CriarEspaco(BGColor)
 			renderer=new THREE.WebGLRenderer( {antialias: true});
 			renderer.setSize (WLargura,WAltura);
 			//renderer.setSize(document.body.clientWidth, document.body.clientHeight);
+			//renderer.autoClear = false;
 			document.body.appendChild(renderer.domElement);
 			renderer.setClearColor(BGColor,1);
 			//document.body.appendChild (renderer.domElement);
+			
 			
 			// EVENTS
 			THREEx.WindowResize(renderer, camera);
@@ -115,11 +117,11 @@ function Desempenho(f,m,b)
 }
 
 // << AS FUNÇÕES ABAIXO ESTAVAM NO ARQUIVO OBJETO.JS - APAGAR ESTE COMENTÁRIO DEPOIS
-function CorpoExtenso(tx,ty,tz,x,y,z,rx,ry,rz)
+function CorpoExtenso(tx,ty,tz,x,y,z,rx,ry,rz,cor,CEbool, Material)
 {
 	var geometria=new THREE.BoxGeometry (tx,ty,tz);
-	var material=new THREE.MeshLambertMaterial ( {color: 0x1ec876, wireframe: false} );
-	//var material=new THREE.MeshBasicMaterial ( {color: 0x1ec876, wireframe: false} );
+	if (Material==0) {var material=new THREE.MeshLambertMaterial ( {color: cor, wireframe: CEbool} );}
+	if (Material==1) {var material=new THREE.MeshBasicMaterial ( {color: cor, wireframe: CEbool} );}
 	this.CorpoExtenso=new THREE.Mesh(geometria, material);
 	cena.add(this.CorpoExtenso);
 	this.CorpoExtenso.position.set(x,y,z);
@@ -300,7 +302,6 @@ function SubtraiVetor(vetor1, vetor2, exibe)
 													dummy.x,
 												    dummy.y,
 													dummy.z,
-													
 													1, branco);
 	}
 }
@@ -463,6 +464,17 @@ function GradeXZ(tamanho,divisao,bool)
 	gridXZ.rotation.set(0,Math.PI*(1/2),0);
 	if (bool) {gridXZ.position.set(tamanho,0,tamanho)} else {gridXZ.position.set(0,0,0)};
 	cena.add(gridXZ);
+}
+
+function Plano(L1, L2, L1Seg, L2Seg, posX, posY, posZ, rotX, rotY, rotZ, cor, visivel, wire)
+{
+	//PlaneGeometry(width, height, widthSegments <opcional -default=1>, heightSegments <opcional -default =1>)
+	var PlaneGeometry = new THREE.PlaneGeometry(L1, L2, L1Seg, L2Seg);
+	var PlaneMaterial = new THREE.MeshBasicMaterial( {color: cor, side: THREE.DoubleSide, visible: visivel, wireframe: wire} );
+	this.Plano = new THREE.Mesh( PlaneGeometry , PlaneMaterial );
+	this.Plano.position.set(posX, posY, posZ);
+	this.Plano.rotation.set(Math.PI*rotX, Math.PI*rotY, Math.PI*rotZ);
+	cena.add( this.Plano);
 }
 
 // --------------------------------------------------------------------------------------------------------------------- Visão ortográfica
