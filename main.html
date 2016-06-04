@@ -17,6 +17,7 @@
 		<script src="js/THREEx.FullScreen.js"></script>
 		<script src="js/THREEx.WindowResize.js"></script>
 		<script src="js/THREEx.KeyboardState.js"></script>
+		<script src="js/threex.dynamictexture.js"></script>
 		<script src='js/DAT.GUI.min.js'></script>
 		
 		<!-- Meus arquivos .js -->
@@ -44,6 +45,9 @@
 			var dummy = new THREE.Vector3();	
 			var keyboard = new THREEx.KeyboardState();
 			var MovXY, MovXZ, MovYZ;
+			var sprite1;
+			var canvas1, context1, texture1;
+			var DESCENDER_ADJUST = 1.28;
 
 			
 			//var sprite1;
