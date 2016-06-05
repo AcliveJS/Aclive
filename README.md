@@ -27,4 +27,4 @@ Navegadores aceitos: Firefox, Google Chrome.
 Dentro da pasta HTML, é possível uma breve explicação sobre os comandos. Basta clicar em Comandos.html
 Os demais arquivos HTML são ficheiros de comando.
 
-Em projeto.js há um exemplo simples que cria 2000 partículas em posições aleatórias na cena, sem simulação!
+Em projeto.js há um exemplo simples de movimento relativo em uma dimensão!
