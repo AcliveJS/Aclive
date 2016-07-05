@@ -1,4 +1,4 @@
-// Declara as variáveis... 
+// Declara as variáveis 
 var pL, pC, pM					// Posição de Lauro, Cora e Marta
 var vFL, vFC, vFM    			// Velocidade de Lauro, Cora e Marta relativo ao referencial fixo (solo)
 var vEC, vEM 						// Velociade Cora e Marta relativo à esteira (OBS: Lauro não está sobre esteira)
