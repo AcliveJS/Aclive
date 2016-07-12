@@ -2,7 +2,7 @@
 function CriarEspaco(BGColor)
 			{
 			// Escolhemos o renderer (neste caso o WebGL)
-			renderer=new THREE.WebGLRenderer( {antialias: true});
+			renderer=new THREE.WebGLRenderer( {precision: "lowp", antialias: false});
 			renderer.setSize (WLargura,WAltura);
 			//renderer.setSize(document.body.clientWidth, document.body.clientHeight);
 			//renderer.autoClear = false;
@@ -962,11 +962,10 @@ function Texto2D( message, x, y, z, EL, EA, parameters )
       
      // text color.  Note that we have to do this AFTER the round-rect as it also uses the "fillstyle" of the canvas 
      context.fillStyle = getCanvasColor(textColor); 
-  
      context.fillText( message, cx - tx, cy + ty); 
    
     // canvas contents will be used for a texture 
-     var texture = new THREE.Texture(canvas) 
+     var texture = new THREE.Texture(canvas);
      texture.needsUpdate = true; 
      
 	 
@@ -987,8 +986,9 @@ function Texto2D( message, x, y, z, EL, EA, parameters )
 	 
 	 
 	 
-     var spriteMaterial = new THREE.SpriteMaterial( { map: texture } ); 
-     this.Texto2D = new THREE.Sprite( spriteMaterial );	
+     this.Sprite = new THREE.SpriteMaterial( { map: texture } ); 
+     this.Texto2D = new THREE.Sprite( this.Sprite );	
+	 this.Texto2D.needsUpdate = true;
       
      // we MUST set the scale to 2:1.  The canvas is already at a 2:1 scale, 
      // but the sprite itself is square: 1.0 by 1.0 
@@ -1044,10 +1044,50 @@ function getCanvasColor ( color ) {
      return "rgba(" + color.r + "," + color.g + "," + color.b + "," + color.a + ")"; 
 } 
 
-function UpdateTexto2D(nome)
+function UpdateTexto2D(nome, mensagem)
 {
 	cena.remove(nome);
+	
 }
+
+// Texto para a cena (3D)
+function Texto(mensagem)
+{
+	var materialFront = new THREE.MeshPhongMaterial( { color: 0xff0000, shading: THREE.SmoothShading } );
+	var materialSide = new THREE.MeshPhongMaterial( { color: 0x000088, shading: THREE.SmoothShading} );
+	var materialArray = [ materialFront, materialSide ];
+	
+	this.textGeom = new THREE.TextGeometry( mensagem, {size: 5, 
+																					    height: 5,
+																						curveSegments: 10, 
+																						font: "helvetiker", 
+																						weight: "bold", 
+																						style: "normal", 
+																						bevelThickness: 10,
+																						bevelSize: 8,
+																						material: 0,
+																						extrudeMaterial: 1});
+
+	
+	this.textGeom.computeBoundingBox();
+	var textWidth = this.textGeom.boundingBox.max.x - this.textGeom.boundingBox.min.x;
+	
+	
+	var textMaterial = new THREE.MeshFaceMaterial(materialArray);
+	this.Texto = new THREE.Mesh(this.textGeom, textMaterial );
+	cena.add(this.Texto);
+	
+	this.Texto.rotation.set(Math.PI / 2, 0,0);
+	this.Texto.position.set(0,0,20);
+	this.Texto.lookAt(camera.position);
+}
+
+function UpdateTexto(nome, mensagem)
+{
+	cena.remove(nome);
+	Texto(mensagem);
+}
+
 
 // função de arredondamento
 function round(value, decimals) {

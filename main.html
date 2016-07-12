@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
 	<head>
@@ -20,6 +19,17 @@
 		<script src="js/THREEx.KeyboardState.js"></script>
 		<script src="js/threex.dynamictexture.js"></script>
 		<script src='js/DAT.GUI.min.js'></script>
+		<!-- fontes -->
+		<script src="js/fonts/gentilis_bold.typeface.js"></script>
+		<script src="js/fonts/gentilis_regular.typeface.js"></script>
+		<script src="js/fonts/optimer_bold.typeface.js"></script>
+		<script src="js/fonts/optimer_regular.typeface.js"></script>
+		<script src="js/fonts/helvetiker_bold.typeface.js"></script>
+		<script src="js/fonts/helvetiker_regular.typeface.js"></script>
+		<script src="js/fonts/droid/droid_sans_regular.typeface.js"></script>
+		<script src="js/fonts/droid/droid_sans_bold.typeface.js"></script>
+		<script src="js/fonts/droid/droid_serif_regular.typeface.js"></script>
+		<script src="js/fonts/droid/droid_serif_bold.typeface.js"></script>
 		
 		<!-- Meus arquivos .js -->
 		<script src="js/Aclive.js"></script>
@@ -73,100 +83,16 @@
 			
 			// Criando uma luz puntual
 			var LuzPuntual=new THREE.PointLight(0xffffff);
-			LuzPuntual.position.set(0,150,0);
+			LuzPuntual.position.set(0,0,100);
 			cena.add(LuzPuntual);
 			
 			// Criando uma luz ambiente
-			var ambientLight = new THREE.AmbientLight(0x000011);
+			var ambientLight = new THREE.AmbientLight(0x222222);
 			cena.add(ambientLight);
 			
 					
 			render();
 			
 		</script>
-	<body>
-=======
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>AcliveJS - by Wallace Robert</title>
-		<style>
-			body {margin: 0; overflow-y:hidden; overflow-x:hidden}
-			canvas {width: 100%; height: 100%}
-			
-		</style>
-	</head>
-	<body>
-		<!-- Inclui as bibliotecas .js que serão utilizadas neste aplicativo-->
-		<script src="js/three.js"></script>
-		<script src="js/Detector.js"></script>
-		<script src="js/OrbitControls.js"></script>
-		<script src="js/Stats.js"></script>
-		<script src="js/THREEx.FullScreen.js"></script>
-		<script src="js/THREEx.WindowResize.js"></script>
-		<script src="js/THREEx.KeyboardState.js"></script>
-		<script src='js/DAT.GUI.min.js'></script>
-		
-		<!-- Meus arquivos .js -->
-		<script src="js/Aclive.js"></script>
-		<script src="projeto.js"></script>	
-		
-		
-		<!-- Programa principal -->
-		<script>
-			// Variáveis globais fixas (não mexer - caso altere este conteúdo o programa poderá não mais funcionar)
-			var renderer, cena, camera, BGColor;	 																						// variáveis globais para main
-			var stats0, stats1, stats2, controle;																							// variáveis globais para stats
-			var WLargura=window.innerWidth, WAltura=window.innerHeight, fov=45, near=01, far=20000;		// variáveis da câmera (observador)
-			var obx=100, oby=100, obz=100;																								// variáveis posição inicial observador
-			var oopx = 0, oopy=0, oopz=0																									// Para onde observador olha inicialmente
-			var boolx=false, booly=false, boolz=false;																				// Para eixos negativos do sist. Cartesiano
-			var nscg = 100																														// tamanho default sist. coord. global
-			var tamXY=100, divXY=5, tamXZ=100, divXZ=5, tamYZ=100, divYZ=5											// parâmetros iniciais da grade
-			var origem, extremidade, direcao, modulo;	
-			var fps =false, ms=false, Mb=false;
-			var px=20, py=20, pz=20;
-			var pausa_animacao=false;
-			var oldx, oldy, oldz														// Posição antiga de uma particula (talvez retirar no futuro)
-			var ContTraj=0;																														// não conta a 1a trajetória (vai ajudar a nos livrarmos dos oldx, oldy, oldz)
-			var dummy = new THREE.Vector3();	
-			var keyboard = new THREEx.KeyboardState();
-			var MovXY, MovXZ, MovYZ;
-
-			
-			//var sprite1;
-			// CORES
-			var azule = 0x0000ff;	
-			var vermelho = 0xff0000;
-			var verde = 0x00ff00;
-			var amarelo = 0xffff00;
-			var rosa = 0xff00ff;
-			var azulc = 0x00ffff;
-			var cinza = 0x555555;
-			var branco = 0xffffff;
-			
-			Ambiente();			
-						
-			
-			// O código abaixo é uma técnica para criarmos skyboxes
-			//var skyboxGeometry=new THREE.CubeGeometry(10000, 10000, 10000);
-			//var skyboxMaterial = new THREE.MeshBasicMaterial({ color: 0x000000, side: THREE.BackSide });
-			//var skybox = new THREE.Mesh(skyboxGeometry, skyboxMaterial);
- 			//cena.add(skybox);
-			
-			// Criando uma luz puntual
-			var LuzPuntual=new THREE.PointLight(0xffffff);
-			LuzPuntual.position.set(0,150,0);
-			cena.add(LuzPuntual);
-			
-			// Criando uma luz ambiente
-			var ambientLight = new THREE.AmbientLight(0x000011);
-			cena.add(ambientLight);
-			
-					
-			render();
-			
-		</script>
-	<body>
->>>>>>> a3e24fb31e4d2f049c2af01e3fd67352f5ffbd3e
+	</body>
 </html>
