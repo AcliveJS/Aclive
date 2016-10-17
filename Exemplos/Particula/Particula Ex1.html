@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang=”pt-br”>
+	<head>
+		<meta charset=”UTF-8”>
+		<title>AcliveJS - by Wallace Robert</title>
+		<style>
+		body {background-color:#aaaabb;}													<!-- Mude a cor de fundo nesta linha-->
+		<body {margin: 0; overflow-y:hidden; overflow-x:hidden;}></body>
+		</style>	
+	</head>
+	<body>
+		<!----------------------------------- Seu código HTML5 - Entradas de dados via formulários aqui (veja o manual) ---------------------------------------------->
+		
+				
+		<!-- ..........................................................................................................................................-->
+		<canvas id="Canvas1" style="border:2px solid #ff0000;">Canvas_1</canvas><!-- Canvas do WebGL p/ 3D      -->
+		<canvas id="Canvas2" style="border:2px solid #0000ff;">Canvas_2</canvas><!-- Canvas do HTML5 p/ 2D      -->
+		<canvas id="Canvas3" style="border:2px solid #00ff00;">Canvas_3</canvas><!-- Canvas do HTML5 p/ Gráficos-->
+		<!-- Inclui as bibliotecas .js que serão utilizadas neste aplicativo-->
+		<script src="js/three.js"></script>
+		<script src="js/Detector.js"></script>
+		<script src="js/OrbitControls.js"></script>
+		<script src="js/Stats.js"></script>
+		<script src="js/THREEx.FullScreen.js"></script>
+		<script src="js/THREEx.WindowResize.js"></script>
+		<script src="js/THREEx.KeyboardState.js"></script>
+		<script src="js/threex.dynamictexture.js"></script>
+		<script src='js/DAT.GUI.min.js'></script>
+		
+		<!-- fontes -->
+		<script src="js/fonts/gentilis_bold.typeface.js"></script>
+		<script src="js/fonts/gentilis_regular.typeface.js"></script>
+		<script src="js/fonts/optimer_bold.typeface.js"></script>
+		<script src="js/fonts/optimer_regular.typeface.js"></script>
+		<script src="js/fonts/helvetiker_bold.typeface.js"></script>
+		<script src="js/fonts/helvetiker_regular.typeface.js"></script>
+		<script src="js/fonts/droid/droid_sans_regular.typeface.js"></script>
+		<script src="js/fonts/droid/droid_sans_bold.typeface.js"></script>
+		<script src="js/fonts/droid/droid_serif_regular.typeface.js"></script>
+		<script src="js/fonts/droid/droid_serif_bold.typeface.js"></script>
+		
+		<!-- Meus arquivos .js -->
+		<script src="js/Aclive.js"></script>
+		<script src="js/projeto1.js"></script>	
+		
+		<!-- Programa principal -->
+		<script>
+			// Variáveis globais fixas (não mexer - caso altere este conteúdo o programa poderá não mais funcionar)
+			
+			// Variáveis globais dos Canvas e das funções Janela3D, Janela2D e JanelaG
+			// Refere-se a janela 3D (Canvas do WebGL)
+			var canvas1 = document.getElementById('Canvas1');
+			canvas1.width  = WLargura*1;
+			canvas1.height = WAltura*1;
+
+			// refere-se a janela 2D (Canvs do HTML)
+			var canvas2 = document.getElementById('Canvas2');
+			var ctx = canvas2.getContext("2d");
+			canvas2.style.width  =  WLargura*1+'px';
+			canvas2.style.height = WAltura*1+'px';
+			canvas2.width  = WLargura*1;
+			canvas2.height = WAltura*1;
+			ctx.fillStyle = 'rgb(0,0,255)';
+			ctx.fillRect(0,0,WLargura*1,WAltura*1);
+
+			// Refere-se a janela 2D para gráficos (Canvas do HTML)
+			var canvas3 = document.getElementById('Canvas3');
+			var gtx = canvas2.getContext("2d");
+			canvas3.style.width  =  WLargura*FLC3+'px';
+			canvas3.style.height = WAltura*FAC3+'px';
+			canvas3.width  = WLargura*FLC3;
+			canvas3.height = WAltura*FAC3;
+			gtx.fillStyle = RetanguloCor;
+			gtx.fillRect(0,0,WLargura*FLC3,WAltura*FAC3);	
+
+			var renderer, cena, camera, BGColor='rgb(200,200,250)';	 
+			var WLargura=window.innerWidth, WAltura=window.innerHeight;
+			var FLC1=1, FAC1=1;		// Fator de altura e largura do canvas1 (WebGL) - 3D
+			var FLC2=1, FAC2=1;		// Fator de altura e largura do canvas2 (HTML5) - 2D
+			var FLC3=1, FAC3=1;		// Fator de altura e largura do canvas3 (HTML5) - 2D p/ gráficos
+			// ........................................................................................................................................
+			// Variáveis globais dos objetos 2D
+			var TextoCor='rgb(0,0,0)'					 // Cor padrão do texto 2D
+			var TamanhoTexto=12     					// Tamanho padrão do texto 2D
+			var RetanguloCor='rgb(0,0,0)';			// Cor do retangulo
+			var RetanguloEspessura=1					// Espessura do retângulo vazado
+			var Linha2DCor = 'rgb(0,0,0)';				// Cor da linha 2D
+			var Linha2Despessura=1;					// espessura da linha 2D
+			var ArcoCor='rgb(0,0,0)';
+			var ArcoEspessura=1;
+			var ArcoSentidoAntiHorario=false;
+			var ArcoFechar=false;
+			var reta='square', boleada='round';
+			var Linha2DBorda=reta;
+			var TextoEspessura=1;
+			//.........................................................................................................................................
+					
+			var stats0, stats1, stats2, controle;																							// variáveis globais para stats
+			var fov=45, near=01, far=20000;		// variáveis da câmera (observador)
+			var obx=100, oby=100, obz=100;																								// variáveis posição inicial observador
+			var oopx = 0, oopy=0, oopz=0																									// Para onde observador olha inicialmente
+			var boolx=false, booly=false, boolz=false;																				// Para eixos negativos do sist. Cartesiano
+			var nscg = 100																														// tamanho default sist. coord. global
+			var tamXY=100, divXY=5, tamXZ=100, divXZ=5, tamYZ=100, divYZ=5											// parâmetros iniciais da grade
+			var origem, extremidade, direcao, modulo;	
+			var fps =false, ms=false, Mb=false;
+			var px=20, py=20, pz=20;
+			var pausa_animacao=false;
+			var oldx, oldy, oldz														// Posição antiga de uma particula (talvez retirar no futuro)
+			var ContTraj=0;																														// não conta a 1a trajetória (vai ajudar a nos livrarmos dos oldx, oldy, oldz)
+			var dummy = new THREE.Vector3();	
+			var keyboard = new THREEx.KeyboardState();
+			var MovXY, MovXZ, MovYZ;
+			var sprite=[];
+			var canvas1, canvas2, canvas3, context1, context2, context3, texture1;
+			var DESCENDER_ADJUST = 1.28;
+			var CorMeio = 'rgb(255,255,255)';
+			var CorGrade = 'rgb(200,200,200)';
+			var pausa_animacao=false;
+			var clock = new THREE.Clock();
+			var imagem, Tx, Ty, TileH, TileV, Total, duracao, Sx, Sy, Sz;
+									
+			//var sprite1;
+			// CORES
+			var azule = 0x0000ff;	
+			var vermelho = 0xff0000;
+			var verde = 0x00ff00;
+			var amarelo = 0xffff00;
+			var rosa = 0xff00ff;
+			var azulc = 0x00ffff;
+			var cinza = 0x555555;
+			var branco = 0xffffff;
+			
+			Ambiente();
+						
+			// O código abaixo é uma técnica para criarmos skyboxes
+			//var skyboxGeometry=new THREE.CubeGeometry(10000, 10000, 10000);
+			//var skyboxMaterial = new THREE.MeshBasicMaterial({ color: 0x000000, side: THREE.BackSide });
+			//var skybox = new THREE.Mesh(skyboxGeometry, skyboxMaterial);
+ 			//cena.add(skybox);
+			
+			// Criando uma luz puntual
+			var LuzPuntual=new THREE.PointLight(0xffffff);
+			LuzPuntual.position.set(0,0,100);
+			cena.add(LuzPuntual);
+			
+			// Criando uma luz ambiente
+			var ambientLight = new THREE.AmbientLight(0x222222);
+			cena.add(ambientLight);
+					
+			render();
+
+		</script>
+		<!-- -------------------------------------------------------------- Seu código HTML aqui (somente informações - sem inputs ------------------------------ -->
+		
+		
+		<!-- --------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+	</body>
+</html>

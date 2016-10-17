@@ -1,0 +1,2 @@
+Abrir preferencialmente com o Firefox.
+Certificar que o navegador utilizado está atualizado.

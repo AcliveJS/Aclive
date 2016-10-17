@@ -1,0 +1,42 @@
+Para criar um projeto AcliveJS e muito fácil, siga as instruções abaixo:
+[1] Copiar a pasta MEU_PROJETO dentro da pasta PROJETO.
+[2] Renomear a pasta MEU_PROJETO para o nome do seu projeto. Ex: Movimento Uniforme
+[3] Se desejar, renomear main.html com o nome do seu projeto. Ex: Movimento Uniforme.html
+[4] Para utilizar recursos numa simulação, como sons e imagens, crie as pastas que
+    precisar dentro da pasta do seu projeto.
+[5] Para começar a codificar, procure dentro da pasta JS pelo arquivo projeto.js. Abra-o com 
+    seu editor favorito (Bloco de Notas, NotePad++, Sublime, etc).
+    IMPORTANTE: Não altere o nome deste arquivo, mantenha sempre como projeto.js
+
+Observe o esquema abaixo. Em caso de dúvidas, verificar os exemplos que vem junto com a Aclive.
+
+    PROJETO
+       |
+       |______ MEU_PROJETO
+		    |
+		    |-------- JS
+		    |          |	
+		    |          |-------- (arquivos .js)
+		    |	       |         É dentro desta pasta que está a AcliveJS e todos 
+		    |	       |	 os demais arquivos da biblioteca, como a three.js. 
+		    |	       |         (IMPORTANTE: Não mexer nestes aquivos!)
+		    |	       |
+		    |	       |-------- projeto.js
+		    |			 Seu arquivo de projeto. É neste arquivo que você 
+		    |			 irá escrever seu programa javascript utilizando os
+		    |			 recursos da biblioteca AcliveJS
+		    |
+		    |
+		    |
+		    |-------- (OUTRAS PASTAS)
+		    |	      Ex: IMAGENS, se o projeto tem imagens. SONS, se tiver efeitos
+                    |             sonoros. MUSICA, se tiver música de fundo. Etc...	
+		    |
+		    |
+		    |-------- meu_projeto.html (renomeado de main.html)
+
+
+Para testar suas simulações, basta clicar duas vezes no arquivo meu_projeto.html
+
+Boas Simulações.
+Wallace Robert
